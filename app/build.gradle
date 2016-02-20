@@ -10,8 +10,8 @@ android {
         applicationId "alejosd5.tumblr.com.sd"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1.1
-        versionName "1.0"
+        versionCode 1
+        versionName "1.1"
     }
     signingConfigs {
 
