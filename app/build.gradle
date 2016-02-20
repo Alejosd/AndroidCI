@@ -18,9 +18,9 @@ android {
 
         release {
             storeFile file("/home/sd/Documentos/tools/keys/sd.jks")
-            storePassword System.getenv("KEYSTOREPASSWORD")
+            storePassword "guitardark"
             keyAlias "alejosd5"
-            keyPassword System.getenv("KEYPASSWORD")
+            keyPassword guitardark
         }
     }
     buildTypes {
