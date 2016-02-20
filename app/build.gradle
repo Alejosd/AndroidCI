@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -11,12 +13,25 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs {
+
+
+        release {
+            storeFile file(System.getenv("PATHSTOREFILE"))
+            storePassword System.getenv("KEYSTOREPASSWORD")
+            keyAlias "alejosd5"
+            keyPassword System.getenv("KEYPASSSWORD")
+        }
+    }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
+
+
 }
 
 dependencies {
