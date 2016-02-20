@@ -20,7 +20,7 @@ android {
             storeFile file("/home/sd/Documentos/tools/keys/sd.jks")
             storePassword "guitardark"
             keyAlias "alejosd5"
-            keyPassword guitardark
+            keyPassword "guitardark"
         }
     }
     buildTypes {
