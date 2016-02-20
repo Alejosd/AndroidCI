@@ -20,7 +20,7 @@ android {
             storeFile file(System.getenv("PATHSTOREFILE"))
             storePassword System.getenv("KEYSTOREPASSWORD")
             keyAlias "alejosd5"
-            keyPassword System.getenv("KEYPASSSWORD")
+            keyPassword System.getenv("KEYPASSWORD")
         }
     }
     buildTypes {
