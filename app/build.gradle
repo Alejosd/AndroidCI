@@ -1,5 +1,23 @@
 apply plugin: 'com.android.application'
+apply plugin: "org.sonarqube"
 
+sonarqube {
+    properties {
+        property "sonar.projectName", "Hello World Android with SQ Scanner for Gradle"
+        property "sonar.version", "1.0"
+
+        property "sonar.sources", "./src/main/java"
+        property "sonar.tests", "./src/test/java"
+
+        property "sonar.java.binaries", "./build/intermediates/classes/release"
+
+        property "sonar.junit.reportsPath", "./build/test-results/release"
+
+        property "sonar.android.lint.report", "./build/outputs/lint-results.xml"
+
+        property "sonar.verbose", "false"
+    }
+}
 
 
 android {
