@@ -15,6 +15,9 @@ sonarqube {
 
         property "sonar.junit.reportsPath", "./build/test-results/release"
 
+        property "sonar.jacoco.reportPath", "./build/jacoco/testDebugUnitTest.exec"
+
+
         property "sonar.android.lint.report", "./build/outputs/lint-results.xml"
 
         property "sonar.verbose", "false"
