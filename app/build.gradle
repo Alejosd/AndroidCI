@@ -5,7 +5,7 @@ apply plugin: "org.sonarqube"
 
 sonarqube {
     properties {
-        property "sonar.projectName", "Hello World Android with SQ Scanner for Gradle"
+        property "sonar.projectName", "android_ejemplo"
         property "sonar.version", "1.0"
 
         property "sonar.sources", "./src/main/java"
