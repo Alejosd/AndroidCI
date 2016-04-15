@@ -41,6 +41,9 @@ android {
             value = 1;
         }
 
+        println 'INIT VARIABLE VERSION CODE----------------------------------'
+        println value
+        println 'INIT VARIABLE VERSION CODE----------------------------------'
         def versionMajor = 1
         def versionMinor = 1
         def versionPatch = versionProps['VERSION_PATCH'].toInteger() + value
