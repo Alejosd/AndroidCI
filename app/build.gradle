@@ -37,7 +37,7 @@ android {
         versionProps.load(new FileInputStream(versionPropsFile))
         def value = 0
         def runTasks = gradle.startParameter.taskNames
-        if ('assemble' in runTasks || 'assembleRelease' in runTasks || 'aR' in runTasks) {
+        if ('assemble' in runTasks ||'build' in runTasks || 'assembleRelease' in runTasks || 'aR' in runTasks) {
             value = 1;
         }
 
