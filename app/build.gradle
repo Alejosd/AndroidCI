@@ -84,12 +84,11 @@ android {
     }*/
     signingConfigs {
 
-
         release {
             storeFile file("/home/sd/Documentos/tools/keys/sd.jks")
-            storePassword "guitardark"
-            keyAlias "alejosd5"
-            keyPassword "guitardark"
+            storePassword System.getenv("STOREPASSWORD")
+            keyPassword System.getenv("STOREKEY")
+            keyAlias System.getenv("STOREALIAS")
         }
     }
     buildTypes {
