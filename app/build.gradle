@@ -84,11 +84,14 @@ android {
     }*/
     signingConfigs {
 
+        storePassword System.getenv("STOREPASSWORD")
+        keyPassword System.getenv("KEYPWD")
+
         release {
             storeFile file("/home/sd/Documentos/tools/keys/sd.jks")
-            storePassword System.getenv("STOREPASSWORD")
-            keyPassword System.getenv("STOREKEY")
-            keyAlias System.getenv("STOREALIAS")
+            storePassword "guitardark"
+            keyAlias "alejosd5"
+            keyPassword "guitardark"
         }
     }
     buildTypes {
