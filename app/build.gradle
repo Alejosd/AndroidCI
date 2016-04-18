@@ -84,7 +84,9 @@ android {
     }*/
     signingConfigs {
 
-
+        println 'STORE PWD----------------------------------'
+        println System.getenv("STOREPASSWORD")
+        println 'STORE PWD----------------------------------'
 
         release {
             storeFile file("/home/sd/Documentos/tools/keys/sd.jks")
