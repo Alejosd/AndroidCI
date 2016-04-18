@@ -82,6 +82,10 @@ android {
         versionCode 2
         versionName "1.1"
     }*/
+
+    println 'VARIABLE----------------------------------'
+    println "${System.env.STOREPASSWORD}"
+    println 'VARIABLE----------------------------------'
     signingConfigs {
         release {
             storeFile file("/home/sd/Documentos/tools/keys/sd.jks")
