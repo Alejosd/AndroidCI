@@ -85,7 +85,7 @@ android {
     signingConfigs {
 
         println 'STORE PWD----------------------------------'
-        println System.getenv("STOREPASSWORD")
+        println System.getenv("STOREKEY")
         println 'STORE PWD----------------------------------'
 
         release {
