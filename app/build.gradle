@@ -85,9 +85,9 @@ android {
     signingConfigs {
         release {
             storeFile file("/home/sd/Documentos/tools/keys/sd.jks")
-            storePassword STOREPASSWORD
-            keyPassword STOREPASSWORD
-            keyAlias STOREALIAS
+            storePassword "${System.env("STOREPASSWORD")}"
+            keyPassword "${System.env("STOREPASSWORD")}"
+            keyAlias "${System.env("STOREALIAS")}"
         }
     }
     buildTypes {
