@@ -74,7 +74,7 @@ android {
             minSdkVersion 15
             targetSdkVersion 23
             versionCode version_Code
-            versionName "${versionMajor}.${versionMinor}.${versionPatch} (${versionBuild})"
+            versionName "${versionMajor}.${versionMinor}.${versionPatch}-(${versionBuild})"
         }
     } else {
         throw new GradleException("Could not read version.properties!")
