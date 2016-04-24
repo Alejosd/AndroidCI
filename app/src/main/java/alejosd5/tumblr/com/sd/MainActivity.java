@@ -27,43 +27,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-   // String API = "http://10.0.2.2:8081";
-
-
-
-    /*private void requestUsername(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        IUser service = retrofit.create(IUser.class);
-
-        Call<User> call = service.getRestUsername();
-        call.enqueue(new Callback<User>() {
-                         @Override
-                         public void onResponse(Call<User> call, Response<User> response) {
-                             User user = response.body();
-                             Log.e("RESPUESTA!!!!",user.getUsername());
-                             TextView songIdText = (TextView) findViewById(R.id.alejotext);
-                             songIdText.setText(user.getUsername());
-                         }
-
-                         @Override
-                         public void onFailure(Call<User> call, Throwable t) {
-                             Log.e("HelloWorld", t.getMessage());
-                         }
-
-
-                     }
-        );
-    }*/
-
     String API = "http://10.0.2.2:8081";
 
     public void sendMessage(View view) {
-        //searchUsers();
+
         saveUsers();
+        searchUsers();
     }
 
 
@@ -97,21 +66,17 @@ public class MainActivity extends AppCompatActivity {
         UserRest userRest = new UserRest(API);
         EditText editText = (EditText) findViewById(R.id.editText);
         String username= editText.getText().toString();
-        Log.e("RESPUESTA USERNAME!!!!", username);
         Call<User> call = userRest.findUsername(username);
         call.enqueue(new Callback<User>() {
                          @Override
                          public void onResponse(Call<User> call, Response<User> response) {
                              User user = response.body();
-                             Log.e("RESPUESTA!!!!", user.getUsername());
                              TextView userText = (TextView) findViewById(R.id.alejotext);
                              userText.setText(user.getUsername());
                          }
 
                          @Override
                          public void onFailure(Call<User> call, Throwable t) {
-                             TextView userText = (TextView) findViewById(R.id.alejotext);
-                             userText.setText("ERROR 404");
                              Log.e("HelloWorld", t.getMessage());
                          }
 
