@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         saveUsers();
         listUsers();
-        //searchUsers();
+        searchUsers();
     }
 
     public void updateListUser(List<User> users){
@@ -114,8 +114,9 @@ public class MainActivity extends AppCompatActivity {
                          @Override
                          public void onResponse(Call<User> call, Response<User> response) {
                              User user = response.body();
-                            // TextView userText = (TextView) findViewById(R.id.alejotext);
-                             //userText.setText(user.getUsername());
+                             TextView userText = (TextView) findViewById(R.id.alejotext);
+                             String mensagge= userText.getText()+"   "+user.getUsername();
+                             userText.setText(mensagge);
                          }
 
                          @Override
