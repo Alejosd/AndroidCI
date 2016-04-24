@@ -10,10 +10,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -36,25 +38,68 @@ public class MainActivity extends AppCompatActivity {
     String API = "http://10.0.2.2:8081";
 
     public void sendMessage(View view) {
-
-
         saveUsers();
         listUsers();
         searchUsers();
     }
+    public void deleteUser(String username){
 
+        UserRest userRest = new UserRest(API);
+        Call<HttpBinResponse> call = userRest.deleteUsername(new User(username));
+        // Asynchronously execute HTTP request
+        call.enqueue(new Callback<HttpBinResponse>() {
+            @Override
+            public void onResponse(Call<HttpBinResponse> call, Response<HttpBinResponse> response) {
+                // http response status code + headers
+                System.out.println("Response status code: " + response.code());
+
+
+            }
+
+            @Override
+            public void onFailure(Call<HttpBinResponse> call, Throwable t) {
+                System.out.println("onFailure");
+                System.out.println(t.getMessage());
+            }
+
+
+        });
+
+    }
+
+
+
+public ListView setListUsers(List<User> users){
+
+    ArrayList<String> list = new ArrayList<>();
+
+    for (User user:users) {
+        list.add(user.getUsername());
+    }
+
+    ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+            android.R.layout.simple_list_item_1, list);
+
+    ListView listView = (ListView) findViewById(R.id.listView);
+
+    listView.setAdapter(adapter);
+
+    return listView;
+}
     public void updateListUser(List<User> users){
 
-        ArrayList<String> list = new ArrayList<>();
-        for (User user:users) {
-            list.add(user.getUsername());
-        }
+        ListView listView = setListUsers(users);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, list);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
-        ListView listView = (ListView) findViewById(R.id.listView);
-        listView.setAdapter(adapter);
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String username = String.valueOf(parent.getItemAtPosition(position));
+                Log.e("ACTUALIZADO", username);
+                //deleteUser(username);
+                listUsers();
+            }
+        });
     }
 
     public void listUsers(){
@@ -66,8 +111,6 @@ public class MainActivity extends AppCompatActivity {
                          public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                              List<User> user = response.body();
                              updateListUser(user);
-
-
                          }
 
                          @Override
@@ -115,7 +158,8 @@ public class MainActivity extends AppCompatActivity {
                          public void onResponse(Call<User> call, Response<User> response) {
                              User user = response.body();
                              TextView userText = (TextView) findViewById(R.id.alejotext);
-                             String mensagge= userText.getText()+"   "+user.getUsername();
+                             userText.setText("");
+                             String mensagge= "add:   "+user.getUsername();
                              userText.setText(mensagge);
                          }
 
@@ -141,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

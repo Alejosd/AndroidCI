@@ -50,4 +50,11 @@ public class UserRest {
         return service.postRestUsername(user);
 
     }
+
+    public Call<HttpBinResponse> deleteUsername(User user){
+
+        IUser service = retrofit.create(IUser.class);
+        return service.deleteRestUsername(user);
+
+    }
 }
