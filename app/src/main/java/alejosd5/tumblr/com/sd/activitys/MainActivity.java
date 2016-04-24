@@ -1,4 +1,4 @@
-package alejosd5.tumblr.com.sd;
+package alejosd5.tumblr.com.sd.activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +10,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import alejosd5.tumblr.com.sd.API.IUser;
+import alejosd5.tumblr.com.sd.R;
 import alejosd5.tumblr.com.sd.models.HttpBinResponse;
 import alejosd5.tumblr.com.sd.models.User;
 import alejosd5.tumblr.com.sd.rest.UserRest;
@@ -31,10 +37,47 @@ public class MainActivity extends AppCompatActivity {
 
     public void sendMessage(View view) {
 
+
         saveUsers();
-        searchUsers();
+        listUsers();
+        //searchUsers();
     }
 
+    public void updateListUser(List<User> users){
+
+        ArrayList<String> list = new ArrayList<>();
+        for (User user:users) {
+            list.add(user.getUsername());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, list);
+
+        ListView listView = (ListView) findViewById(R.id.listView);
+        listView.setAdapter(adapter);
+    }
+
+    public void listUsers(){
+
+        UserRest userRest = new UserRest(API);
+        Call<List<User>> call = userRest.listUsername();
+        call.enqueue(new Callback<List<User>>() {
+                         @Override
+                         public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                             List<User> user = response.body();
+                             updateListUser(user);
+
+
+                         }
+
+                         @Override
+                         public void onFailure(Call<List<User>> call, Throwable t) {
+                             Log.e("HelloWorld", t.getMessage());
+                         }
+
+                     }
+        );
+    }
 
     public void saveUsers(){
 
@@ -71,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
                          @Override
                          public void onResponse(Call<User> call, Response<User> response) {
                              User user = response.body();
-                             TextView userText = (TextView) findViewById(R.id.alejotext);
-                             userText.setText(user.getUsername());
+                            // TextView userText = (TextView) findViewById(R.id.alejotext);
+                             //userText.setText(user.getUsername());
                          }
 
                          @Override

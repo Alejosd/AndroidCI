@@ -3,6 +3,8 @@ package alejosd5.tumblr.com.sd.rest;
 import android.util.Log;
 import android.widget.TextView;
 
+import java.util.List;
+
 import alejosd5.tumblr.com.sd.API.IUser;
 import alejosd5.tumblr.com.sd.R;
 import alejosd5.tumblr.com.sd.models.HttpBinResponse;
@@ -33,6 +35,13 @@ public class UserRest {
 
         IUser service = retrofit.create(IUser.class);
         return service.getRestUsername(username);
+
+    }
+
+    public Call<List<User>> listUsername(){
+
+        IUser service = retrofit.create(IUser.class);
+        return service.getListUsername();
 
     }
     public Call<HttpBinResponse> saveUsername(User user){

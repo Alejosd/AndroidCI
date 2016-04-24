@@ -11,23 +11,15 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main"
-    tools:context="alejosd5.tumblr.com.sd.MainActivity">
+    tools:context=".activitys.MainActivity">
 
-    <TextView
-        android:text="Alejandro Sierra Duran"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/alejotext"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/find_users"
+        android:text="@string/save_users"
         android:id="@+id/userButton"
-        android:layout_below="@+id/alejotext"
-        android:layout_alignRight="@+id/alejotext"
-        android:layout_alignEnd="@+id/alejotext"
         android:layout_marginTop="131dp"
         android:onClick="sendMessage" />
 
@@ -40,7 +32,25 @@
         android:layout_alignLeft="@+id/userButton"
         android:layout_alignStart="@+id/userButton"
         android:layout_alignRight="@+id/userButton"
-        android:layout_alignEnd="@+id/userButton" />
+        android:layout_alignEnd="@+id/userButton"
+        android:inputType="text" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/userButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
 
 
 </RelativeLayout>
+
+

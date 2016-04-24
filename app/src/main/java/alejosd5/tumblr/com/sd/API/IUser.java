@@ -1,5 +1,7 @@
 package alejosd5.tumblr.com.sd.API;
 
+import java.util.List;
+
 import alejosd5.tumblr.com.sd.models.HttpBinResponse;
 import alejosd5.tumblr.com.sd.models.User;
 import retrofit2.Call;
@@ -17,6 +19,9 @@ public interface IUser {
 
     @GET("/users/{username}")
     Call<User> getRestUsername(@Path("username") String user);
+
+    @GET("/users")
+    Call<List<User>> getListUsername();
 
 
     @POST("/users/save")
