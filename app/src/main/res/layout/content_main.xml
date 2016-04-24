@@ -15,6 +15,32 @@
 
     <TextView
         android:text="Alejandro Sierra Duran"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/alejotext"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/find_users"
+        android:id="@+id/userButton"
+        android:layout_below="@+id/alejotext"
+        android:layout_alignRight="@+id/alejotext"
+        android:layout_alignEnd="@+id/alejotext"
+        android:layout_marginTop="131dp"
+        android:onClick="sendMessage" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_marginBottom="63dp"
+        android:layout_alignBottom="@+id/userButton"
+        android:layout_alignLeft="@+id/userButton"
+        android:layout_alignStart="@+id/userButton"
+        android:layout_alignRight="@+id/userButton"
+        android:layout_alignEnd="@+id/userButton" />
+
+
 </RelativeLayout>

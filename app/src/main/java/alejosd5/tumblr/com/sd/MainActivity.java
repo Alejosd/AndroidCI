@@ -1,15 +1,130 @@
 package alejosd5.tumblr.com.sd;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
+
+
+import alejosd5.tumblr.com.sd.API.IUser;
+import alejosd5.tumblr.com.sd.models.HttpBinResponse;
+import alejosd5.tumblr.com.sd.models.User;
+import alejosd5.tumblr.com.sd.rest.UserRest;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class MainActivity extends AppCompatActivity {
+
+   // String API = "http://10.0.2.2:8081";
+
+
+
+    /*private void requestUsername(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(API)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        IUser service = retrofit.create(IUser.class);
+
+        Call<User> call = service.getRestUsername();
+        call.enqueue(new Callback<User>() {
+                         @Override
+                         public void onResponse(Call<User> call, Response<User> response) {
+                             User user = response.body();
+                             Log.e("RESPUESTA!!!!",user.getUsername());
+                             TextView songIdText = (TextView) findViewById(R.id.alejotext);
+                             songIdText.setText(user.getUsername());
+                         }
+
+                         @Override
+                         public void onFailure(Call<User> call, Throwable t) {
+                             Log.e("HelloWorld", t.getMessage());
+                         }
+
+
+                     }
+        );
+    }*/
+
+    String API = "http://10.0.2.2:8081";
+
+    public void sendMessage(View view) {
+        //searchUsers();
+        saveUsers();
+    }
+
+
+    public void saveUsers(){
+
+        UserRest userRest = new UserRest(API);
+        EditText editText = (EditText) findViewById(R.id.editText);
+        String username= editText.getText().toString();
+        Call<HttpBinResponse> call = userRest.saveUsername(new User(username));
+        // Asynchronously execute HTTP request
+        call.enqueue(new Callback<HttpBinResponse>() {
+            @Override
+            public void onResponse(Call<HttpBinResponse> call, Response<HttpBinResponse> response) {
+                // http response status code + headers
+                System.out.println("Response status code: " + response.code());
+
+            }
+
+            @Override
+            public void onFailure(Call<HttpBinResponse> call, Throwable t) {
+                System.out.println("onFailure");
+                System.out.println(t.getMessage());
+            }
+
+
+        });
+    }
+
+    public void searchUsers(){
+
+        UserRest userRest = new UserRest(API);
+        EditText editText = (EditText) findViewById(R.id.editText);
+        String username= editText.getText().toString();
+        Log.e("RESPUESTA USERNAME!!!!", username);
+        Call<User> call = userRest.findUsername(username);
+        call.enqueue(new Callback<User>() {
+                         @Override
+                         public void onResponse(Call<User> call, Response<User> response) {
+                             User user = response.body();
+                             Log.e("RESPUESTA!!!!", user.getUsername());
+                             TextView userText = (TextView) findViewById(R.id.alejotext);
+                             userText.setText(user.getUsername());
+                         }
+
+                         @Override
+                         public void onFailure(Call<User> call, Throwable t) {
+                             TextView userText = (TextView) findViewById(R.id.alejotext);
+                             userText.setText("ERROR 404");
+                             Log.e("HelloWorld", t.getMessage());
+                         }
+
+
+                     }
+        );
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,35 +133,35 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                                .setAction("Action", null).show();
+                    }
+                });
             }
-        });
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+            @Override
+            public boolean onCreateOptionsMenu(Menu menu) {
+                // Inflate the menu; this adds items to the action bar if it is present.
+                getMenuInflater().inflate(R.menu.menu_main, menu);
+                return true;
+            }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+            @Override
+            public boolean onOptionsItemSelected(MenuItem item) {
+                // Handle action bar item clicks here. The action bar will
+                // automatically handle clicks on the Home/Up button, so long
+                // as you specify a parent activity in AndroidManifest.xml.
+                int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                //noinspection SimplifiableIfStatement
+                if (id == R.id.action_settings) {
+                    return true;
+                }
+
+                return super.onOptionsItemSelected(item);
+            }
         }
-
-        return super.onOptionsItemSelected(item);
-    }
-}
